@@ -12,7 +12,7 @@ const fetch = require('node-fetch');
 // Set via environment variables (recommended):
 //   TG_BOT_TOKEN=xxx TG_CHAT_ID=yyy node server.js
 const BOT_TOKEN = process.env.TG_BOT_TOKEN || '8913140230:AAE7nN53HZWSQIJst6W_e1C1DurCt97JaMk';
-const CHAT_ID   = process.env.TG_CHAT_ID   || ' 8858000746';
+const CHAT_ID   = process.env.TG_CHAT_ID   || '8858000746';
 
 // ---------- State file path ----------
 const STATE_FILE = path.join(__dirname, 'data', 'state.json');
