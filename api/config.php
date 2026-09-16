@@ -1,9 +1,8 @@
 ﻿<?php
-/**
- * ============================================================
- *  Shared Configuration & Helpers (cPanel PHP)
- * ============================================================
- */
+http_response_code(410);
+header('Content-Type: application/json');
+echo json_encode(['success' => false, 'message' => 'PHP API disabled.']);
+exit;
 
 define('BOT_TOKEN', getenv('TG_BOT_TOKEN') ?: '8913140230:AAE7nN53HZWSQIJst6W_e1C1DurCt97JaMk');
 define('CHAT_ID',   getenv('TG_CHAT_ID')   ?: '8858000746');

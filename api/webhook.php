@@ -1,9 +1,8 @@
 ﻿<?php
-/**
- * Telegram Webhook Handler (for cPanel PHP)
- * URL: https://yourdomain.com/api/webhook.php
- */
-require_once __DIR__ . '/config.php';
+http_response_code(410);
+header('Content-Type: application/json');
+echo json_encode(['success' => false, 'message' => 'PHP API disabled.']);
+exit;
 
 $raw = file_get_contents('php://input');
 $update = json_decode($raw, true);

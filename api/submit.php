@@ -1,8 +1,8 @@
 ﻿<?php
-/**
- * POST /api/submit.php
- */
-require_once __DIR__ . '/config.php';
+http_response_code(410);
+header('Content-Type: application/json');
+echo json_encode(['success' => false, 'message' => 'PHP API disabled.']);
+exit;
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     jsonOut(['success' => false, 'message' => 'Invalid request method.'], 405);

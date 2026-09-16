@@ -1,8 +1,8 @@
 ﻿<?php
-/**
- * GET /api/status.php
- */
-require_once __DIR__ . '/config.php';
+http_response_code(410);
+header('Content-Type: application/json');
+echo json_encode(['success' => false, 'message' => 'PHP API disabled.']);
+exit;
 
 header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
 
