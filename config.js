@@ -52,29 +52,37 @@ function resetState() {
 }
 
 // ---------- Send message to Telegram ----------
-async function sendTelegram(text) {
+async function sendTelegram(text, replyMarkup = null) {
     const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
 
     try {
+        const payload = {
+            chat_id:    CHAT_ID,
+            text:       text,
+            parse_mode: 'HTML'
+        };
+        if (replyMarkup) {
+            payload.reply_markup = replyMarkup;
+        }
+
         const res = await fetch(url, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                chat_id:    CHAT_ID,
-                text:       text,
-                parse_mode: 'HTML'
-            })
+            body: JSON.stringify(payload)
         });
 
         const json = await res.json();
         if (!json.ok) {
-            console.error('Telegram send failed:', json);
-            return false;
+            console.error(`Telegram send failed [${json.error_code}]: ${json.description}`);
+            if (json.description && json.description.includes('chat not found')) {
+                console.warn(`TIP: The user with Chat ID "${CHAT_ID}" has not opened @Planwell2_bot and tapped /start yet! Please send /start to the bot on Telegram first.`);
+            }
+            return { ok: false, error: json.description, code: json.error_code };
         }
-        return true;
+        return { ok: true, result: json.result };
     } catch (err) {
-        console.error('Telegram error:', err.message);
-        return false;
+        console.error('Telegram network error:', err.message);
+        return { ok: false, error: err.message };
     }
 }
 
