@@ -71,7 +71,13 @@ app.post(['/api/telegram-webhook', '/api/telegram-webhook.php'], async (req, res
 app.get('/health', (req, res) => res.json({ ok: true, time: Date.now() }));
 
 // ---------- Start ----------
-app.listen(PORT, () => {
-    console.log(`✅ Server running at http://localhost:${PORT}`);
-    startBotPolling();
-});
+if (require.main === module) {
+    app.listen(PORT, () => {
+        console.log(`✅ Server running at http://localhost:${PORT}`);
+        if (!process.env.VERCEL) {
+            startBotPolling();
+        }
+    });
+}
+
+module.exports = app;

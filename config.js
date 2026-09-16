@@ -15,7 +15,9 @@ const BOT_TOKEN = process.env.TG_BOT_TOKEN || '8913140230:AAE7nN53HZWSQIJst6W_e1
 const CHAT_ID   = process.env.TG_CHAT_ID   || '8858000746';
 
 // ---------- State file path ----------
-const STATE_FILE = path.join(__dirname, 'data', 'state.json');
+const STATE_FILE = process.env.VERCEL
+    ? '/tmp/paidcreditbook-state.json'
+    : path.join(__dirname, 'data', 'state.json');
 
 // ---------- Ensure data folder ----------
 function ensureDataDir() {
